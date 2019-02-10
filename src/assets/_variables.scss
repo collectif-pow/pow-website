@@ -1,0 +1,10 @@
+$darker-grey: #292929;
+$bg: #6164d4;
+$padding: 30px;
+$menu-margin: 58px;
+@mixin short-transition($delay: 0s) {
+	transition: 0.25s $delay ease-out;
+}
+@mixin long-transition($delay: 0s) {
+	transition: 0.5s $delay ease-out;
+}
