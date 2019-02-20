@@ -21,13 +21,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			members: state => {
-				const m = [];
-				for (var i = 0; i < 7; i++) {
-					m.push(state.members[0]);
-				}
-				return m;
-			},
+			members: state => state.members,
 		}),
 	},
 };
