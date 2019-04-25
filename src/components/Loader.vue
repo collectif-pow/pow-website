@@ -13,10 +13,5 @@ export default {};
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	h1 {
-		font-weight: 700;
-		font-size: 5em;
-		color: white;
-	}
 }
 </style>
