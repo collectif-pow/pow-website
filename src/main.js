@@ -5,6 +5,8 @@ import store from './store';
 
 import 'normalize.css';
 import '@/assets/base.scss';
+import smoothscroll from 'smoothscroll-polyfill';
+smoothscroll.polyfill();
 
 Vue.config.productionTip = false;
 

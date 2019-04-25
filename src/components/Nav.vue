@@ -6,30 +6,9 @@
 			<span></span>
 		</div>
 		<div class="nav--list">
-			<router-link to="/"
-				>HOME
-				<svg width="100%" height="100%">
-					<line x1="15%" y1="50%" x2="85%" y2="50%" />
-				</svg>
-			</router-link>
-			<router-link to="/about"
-				>ABOUT
-				<svg width="100%" height="100%">
-					<line x1="15%" y1="50%" x2="85%" y2="50%" />
-				</svg>
-			</router-link>
-			<router-link to="/residencies"
-				>RESIDENCIES
-				<svg width="100%" height="100%">
-					<line x1="10%" y1="50%" x2="90%" y2="50%" />
-				</svg>
-			</router-link>
-			<router-link to="/members"
-				>MEMBERS
-				<svg width="100%" height="100%">
-					<line x1="10%" y1="50%" x2="90%" y2="50%" />
-				</svg>
-			</router-link>
+			<router-link to="/projects">PROJETS</router-link>
+			<router-link to="/residencies">RÉSIDENCES</router-link>
+			<router-link to="/members">MEMBRES</router-link>
 		</div>
 	</div>
 </template>
@@ -55,63 +34,22 @@ export default {
 @import '../assets/_variables';
 // general styling
 .nav {
-	z-index: 2;
 	position: absolute;
-	top: 20px;
-	right: 20px;
+	z-index: 2;
+	top: 0;
+	right: 0;
 	display: flex;
 	justify-content: flex-end;
-	width: 100%;
 	box-sizing: border-box;
-	height: auto;
-	@media (max-width: 768px) {
-		padding: 0;
-		top: 0;
-		right: 0;
-	}
-	&.white {
-		@media (max-width: 768px) {
-			background-color: white;
-		}
-	}
-	a {
-		padding: 0 15px 0 15px;
-		letter-spacing: 2px;
-		font-weight: bold;
-		text-decoration: none;
-		color: white;
-		position: relative;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		@include short-transition;
-		@media (max-width: 768px) {
-			color: $darker-grey;
-			text-align: center;
-			opacity: 0;
-		}
-		&.router-link-exact-active svg,
-		&:hover svg {
-			stroke-dashoffset: 0;
-		}
-		svg {
-			stroke: white;
-			@media (max-width: 768px) {
-				stroke: $darker-grey;
-			}
-		}
-	}
+	background-color: white;
+	height: 100vh;
 	.menu-icon {
+		position: fixed;
+		z-index: 2;
+		display: block;
 		width: 36px;
 		height: 28px;
-		z-index: 2;
-		display: none;
-		cursor: pointer;
-		@media (max-width: 768px) {
-			display: block;
-			position: absolute;
-			margin: 30px 30px 0 -30px;
-		}
+		margin: 30px 30px 0 -30px;
 		span {
 			display: block;
 			position: absolute;
@@ -151,48 +89,56 @@ export default {
 				}
 			}
 		}
-		&.fixed {
-			position: fixed;
-		}
-		&.fill {
-			@media (max-width: 768px) {
-				fill: $darker-grey;
-			}
-		}
 	}
 	.nav--list {
+		position: fixed;
+		top: 0;
+		width: 100vw;
+		height: 100vh;
+		padding: 20vh 0;
 		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: space-around;
 		overflow: hidden;
+		background-color: #ffffff;
+		visibility: hidden;
+		opacity: 0;
 		@include long-transition;
-		@media (max-width: 768px) {
-			height: 0;
-			width: 100%;
-			flex-direction: column;
-			align-items: center;
-			justify-content: space-around;
-			overflow: hidden;
-			position: fixed;
+		a {
+			line-height: 0.8;
+			font-size: 3em;
+			text-decoration: none;
+			color: $darker-grey;
+			opacity: 0;
+			transform: translateX(-20px);
+			@include short-transition;
+			&.router-link-exact-active {
+				text-decoration: line-through;
+			}
+			@media (max-width: 768px) {
+				font-size: 2em;
+			}
 		}
 		&.showing {
-			@media (max-width: 768px) {
-				height: 100vh;
-				padding: 5% 0 5% 0;
-				background-color: white;
-			}
+			visibility: visible;
+			opacity: 1;
 			a {
-				@media (max-width: 768px) {
-					opacity: 1;
+				opacity: 1;
+				transform: translateX(0);
+				&:nth-child(1) {
+					@include short-transition(0.2s);
+				}
+				&:nth-child(2) {
+					@include short-transition(0.3s);
+				}
+				&:nth-child(3) {
+					@include short-transition(0.4s);
+				}
+				&:nth-child(4) {
+					@include short-transition(0.5s);
 				}
 			}
-		}
-		svg {
-			position: absolute;
-			stroke-width: 1.5px;
-			stroke-dasharray: 150 150;
-			stroke-dashoffset: 150;
-			@include short-transition;
-			top: 0;
-			left: 0;
 		}
 	}
 }

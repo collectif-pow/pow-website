@@ -1,6 +1,6 @@
 <template lang="html">
-	<div>
-		<h1>Loading...</h1>
+	<div class="page loader">
+		<h1 class="title">Loading...</h1>
 	</div>
 </template>
 
@@ -9,10 +9,8 @@ export default {};
 </script>
 
 <style scoped lang="scss">
-div {
+.loader {
 	display: flex;
-	width: 100%;
-	height: 100%;
 	justify-content: center;
 	align-items: center;
 	h1 {

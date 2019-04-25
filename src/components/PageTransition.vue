@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div :style="style">
 		<svg width="100%" height="100%" :style="style">
 			<rect x="0" :y="y" :width="width" height="100%" :fill="fill" />
 		</svg>
@@ -90,10 +90,6 @@ div {
 	box-sizing: border-box;
 	width: 100%;
 	height: 100%;
-	padding: 0;
-	@media (min-width: 768px) {
-		padding: $padding;
-	}
 	svg {
 		rect {
 			will-change: y, height;

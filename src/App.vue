@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import Loader from '@/components/Loader.vue';
 import PageTransition from '@/components/PageTransition.vue';
 
@@ -29,9 +31,9 @@ export default {
 		PageTransition,
 	},
 	computed: {
-		loading() {
-			return this.$store.state.loading;
-		},
+		...mapState({
+			loading: state => state.loading,
+		}),
 	},
 	methods: {
 		beforeLeave(el) {
@@ -66,23 +68,16 @@ export default {
 @import './assets/_variables';
 
 #app {
+	position: relative;
 	font-family: 'Open Sans', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	-webkit-overflow-scrolling: touch;
-	color: $darker-grey;
-	height: 100vh;
-	padding: 0;
 	box-sizing: border-box;
-	overflow-x: hidden;
-	@media (min-width: 768px) {
-		overflow: hidden;
-		padding: $padding;
-	}
+	overflow-x: auto;
+	overflow-y: hidden;
 	.container {
 		position: relative;
-		width: 100%;
-		height: 100%;
 		background-color: $bg;
 	}
 }
