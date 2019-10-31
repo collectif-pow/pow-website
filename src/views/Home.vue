@@ -1,52 +1,103 @@
 <template>
 	<div class="page home">
-		<Shape />
+		<Shape :step="step" />
 		<Nav />
-		<div class="content">
+		<full-page ref="fullpage" :options="fpOptions" class="content">
 			<section class="hero">
 				<h1 class="title">
-					Ici c'est POW
+					Ici c'est <span class="pow" ref="pow">POW</span>
 				</h1>
-				<h2 class="tagline">
-					Curieux, créatifs et rigolos
-				</h2>
+				<h2 class="tagline" v-html="about.tagline"></h2>
 				<a class="scroll" @click="scroll('about')">À propos</a>
 			</section>
 			<section class="about" ref="about">
-				<div v-html="about.description"></div>
+				<div
+					class="text"
+					v-ov="{
+						callback: toggleVisible,
+						threshold: 1,
+						throttle: 300,
+					}"
+					v-html="about.description"
+				></div>
 				<a class="scroll" @click="scroll('projects')"
 					>Nos derniers projets</a
 				>
 			</section>
-			<section class="projects" ref="projects"></section>
-		</div>
+			<section class="projects" ref="projects">
+				<Slider :slides="projects" />
+				<Footer />
+			</section>
+		</full-page>
 	</div>
 </template>
 
 <script>
 import { mapState } from 'vuex';
+import charming from 'charming';
 
 import Nav from '@/components/Nav.vue';
+import Footer from '@/components/Footer.vue';
 import Shape from '@/components/Shape.vue';
+import Slider from '@/components/Slider.vue';
 
 export default {
 	name: 'home',
 	components: {
 		Nav,
+		Footer,
 		Shape,
+		Slider,
+	},
+	data() {
+		return {
+			step: 0,
+			fpOptions: {
+				licenseKey: '6C7F8D07-557D4FC4-8DF0F791-5714BE41',
+				navigation: false,
+				sectionSelector: 'section',
+				slideSelector: '.nope',
+				onLeave: this.incStep,
+			},
+		};
+	},
+	mounted() {
+		setTimeout(() => {
+			this.incStep();
+		}, 1000);
+		this.wobble();
+		charming(this.$refs.pow);
+	},
+	beforeDestroy() {
+		clearInterval(this.interval);
 	},
 	computed: {
 		...mapState({
 			about: state => state.about,
+			projects: state => [
+				state.projects[0],
+				state.projects[0],
+				state.projects[0],
+			],
 		}),
 	},
 	methods: {
-		scroll(ref) {
-			window.scroll({
-				top: this.$refs[ref].offsetTop,
-				left: 0,
-				behavior: 'smooth',
-			});
+		incStep() {
+			clearInterval(this.interval);
+			this.step++;
+			this.wobble();
+		},
+		wobble() {
+			this.interval = setInterval(() => {
+				this.step++;
+			}, 8000);
+		},
+		scroll() {
+			this.incStep();
+			this.$refs.fullpage.api.moveSectionDown();
+		},
+		toggleVisible(isVisible, entry) {
+			if (isVisible) entry.target.classList.add('visible');
 		},
 	},
 };
@@ -58,25 +109,67 @@ export default {
 	display: flex;
 	flex-direction: column;
 	width: 100%;
+	z-index: 1;
 	section {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		height: 100vh;
+		/deep/ .fp-tableCell {
+			position: relative;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+			height: calc(var(--vh, 1vh) * 100);
+		}
 	}
 	.hero {
+		.title {
+			.pow {
+				/deep/ span {
+					display: inline-block;
+					color: rgba(255, 0, 0, 0.75);
+					transform: translateY(-20px);
+					opacity: 0;
+					animation: translateUp 0.5s 0.2s;
+					animation-fill-mode: forwards;
+					&:first-child,
+					&:last-child {
+						transform: translateY(20px);
+						animation: translateDown 0.5s 0.2s;
+						animation-fill-mode: forwards;
+					}
+				}
+			}
+		}
 		.tagline {
 			opacity: 0.75;
 		}
 	}
 	.about {
-		div {
+		@media (max-width: 768px) {
+			padding: 0 30px;
+		}
+		.text {
 			width: 100%;
 			max-width: 800px;
-			border-left: 2px solid rgba(255, 255, 255, 0.5);
+			border-left: 2px solid rgba(255, 255, 255, 0);
 			padding-left: 30px;
+			@include long-transition;
+			@media (max-width: 768px) {
+				border-left: none !important;
+				padding-left: 0;
+			}
+			/deep/ * {
+				opacity: 0;
+				transform: translateY(20px);
+				@include long-transition;
+			}
+			&.visible {
+				border-left: 2px solid rgba(255, 255, 255, 0.5);
+				/deep/ * {
+					opacity: 1;
+					transform: translateY(0);
+				}
+			}
 		}
 	}
 	.scroll {
@@ -93,6 +186,7 @@ export default {
 		color: #ffffff;
 		opacity: 0.75;
 		cursor: pointer;
+		user-select: none;
 		&::before {
 			position: absolute;
 			content: '';
@@ -112,6 +206,27 @@ export default {
 				bottom: 30px;
 			}
 		}
+	}
+}
+@keyframes translateDown {
+	0% {
+		transform: translateY(20px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
+	}
+}
+
+@keyframes translateUp {
+	0% {
+		transform: translateY(-20px);
+		opacity: 0;
+	}
+	100% {
+		transform: translateY(0);
+		opacity: 1;
 	}
 }
 </style>

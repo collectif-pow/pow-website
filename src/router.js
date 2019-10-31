@@ -14,16 +14,10 @@ export default new Router({
 			component: Home,
 		},
 		{
-			path: '/about',
-			name: 'about',
+			path: '/collaborations',
+			name: 'collaborations',
 			component: () =>
-				import(/* webpackChunkName: "about" */ './views/About.vue'),
-		},
-		{
-			path: '/residencies',
-			name: 'residencies',
-			component: () =>
-				import(/* webpackChunkName: "members" */ './views/Residencies.vue'),
+				import(/* webpackChunkName: "members" */ './views/Collaborations.vue'),
 		},
 		{
 			path: '/projects',

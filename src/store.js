@@ -16,7 +16,9 @@ export default new Vuex.Store({
 			);
 		},
 		getMemberById: state => id => {
-			return state.members.find(member => member.id === parseInt(id, 10));
+			return state.members.find(
+				member => member.id === parseInt(id, 10)
+			);
 		},
 	},
 	mutations: {

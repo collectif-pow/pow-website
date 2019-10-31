@@ -8,3 +8,10 @@ $menu-margin: 58px;
 @mixin long-transition($delay: 0s) {
 	transition: 0.5s $delay ease-out;
 }
+@mixin iterate($n) {
+	@for $i from 1 through $n {
+		&:nth-child(#{$i}) {
+			transition: all 0.2s #{$i * 0.1}s ease-out;
+		}
+	}
+}

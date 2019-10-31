@@ -1,23 +1,23 @@
 <template>
-	<div class="member" :class="index % 2 ? 'right' : 'left'">
+	<div class="project" :class="index % 2 ? 'right' : 'left'">
 		<div
 			class="picture"
 			:style="{
-				'background-image': `url(${member.picture.sizes.large})`,
+				'background-image': `url(${
+					project.featured_image.sizes.large
+				})`,
 			}"
 		></div>
 		<div class="infos">
-			<h2 class="name">
-				<span>{{ member.forename }}</span
-				><br /><span>{{ member.name }}</span>
-			</h2>
-			<p class="bio" v-html="member.bio"></p>
+			<h2 class="title">{{ project.title }}</h2>
+			<p class="date" v-html="computeDate()"></p>
+			<p class="tagline" v-html="project.tagline"></p>
 			<a
 				class="website"
-				:href="member.website"
+				:href="project.website"
 				target="_blank"
-				v-if="member.website"
-				>{{ member.website.split('//')[1] }}</a
+				v-if="project.website"
+				>{{ project.website.split('//')[1] }}</a
 			>
 		</div>
 	</div>
@@ -26,15 +26,24 @@
 <script>
 export default {
 	props: {
-		member: Object,
+		project: Object,
 		index: Number,
+	},
+	mounted() {
+		console.log(this.project);
+	},
+	methods: {
+		computeDate() {
+			const d = this.project.date;
+			return `${d.substr(4, 2)}/${d.substr(0, 4)}`;
+		},
 	},
 };
 </script>
 
 <style scoped lang="scss">
 @import '../assets/_variables';
-.member {
+.project {
 	position: relative;
 	display: flex;
 	align-self: flex-start;
@@ -67,6 +76,10 @@ export default {
 		flex-direction: column;
 		@media (max-width: 768px) {
 			flex: 1;
+		}
+		h2,
+		p {
+			margin: 0;
 		}
 	}
 	.picture {

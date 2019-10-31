@@ -6,8 +6,9 @@
 			<span></span>
 		</div>
 		<div class="nav--list">
+			<router-link to="/">ACCUEIL</router-link>
 			<router-link to="/projects">PROJETS</router-link>
-			<router-link to="/residencies">RÉSIDENCES</router-link>
+			<router-link to="/collaborations">COLLABORATIONS</router-link>
 			<router-link to="/members">MEMBRES</router-link>
 		</div>
 	</div>
