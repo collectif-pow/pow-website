@@ -17,6 +17,15 @@ Vue.directive('ov', ObserveVisibility)
 import VueFullPage from 'vue-fullpage.js'
 Vue.use(VueFullPage)
 
+console.log(
+  '%c🔥🔥🔥coucou@pow.cool🔥🔥🔥',
+  `
+  font-weight: bold;
+  font-size: 20px;
+  color: #ee0082;
+  `
+)
+
 Vue.config.productionTip = false
 new Vue({
   router,
