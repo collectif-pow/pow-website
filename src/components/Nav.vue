@@ -6,10 +6,10 @@
       <span></span>
     </div>
     <div class="nav--list">
-      <router-link to="/">ACCUEIL</router-link>
-      <router-link to="/projects">PROJETS</router-link>
+      <router-link to="/" @click.native="showMenu">ACCUEIL</router-link>
+      <router-link to="/projects" @click.native="showMenu">PROJETS</router-link>
       <!-- <router-link to="/collaborations">COLLABORATIONS</router-link> -->
-      <router-link to="/members">MEMBRES</router-link>
+      <router-link to="/members" @click.native="showMenu">MEMBRES</router-link>
     </div>
   </div>
 </template>
@@ -51,6 +51,7 @@ export default {
     width: 36px;
     height: 28px;
     margin: 30px 30px 0 -30px;
+    cursor: pointer;
     span {
       display: block;
       position: absolute;
