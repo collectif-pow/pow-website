@@ -1,65 +1,69 @@
-@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CUbuntu');
+@import './variables';
 
 body {
-	font-family: 'Open Sans', sans-serif;
-	min-height: calc(var(--vh, 1vh) * 100) !important;
+  font-family: 'Open Sans', sans-serif;
+  min-height: calc(var(--vh, 1vh) * 100) !important;
 }
 
 * {
-	box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .page {
-	position: relative;
-	display: flex;
-	min-height: 100vh;
-	min-height: calc(var(--vh, 1vh) * 100);
+  position: relative;
+  display: flex;
+  min-height: 100vh;
+  min-height: calc(var(--vh, 1vh) * 100);
 }
 
 h1,
 h2,
 h3,
 h4 {
-	color: #ffffff;
-	text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  color: $darker-grey;
+  font-family: 'Open Sans', sans-serif;
 }
 
 h1 {
-	font-weight: 700;
-	font-size: 5em;
-	line-height: 1.6;
-	text-transform: uppercase;
-	&::before,
-	&::after {
-		content: '';
-		display: block;
-		background: #ffffff;
-		width: 80%;
-		height: 2px;
-		margin: 40px auto 5px;
-	}
-	&::after {
-		margin: 5px auto 0;
-	}
-	@media (max-width: 768px) {
-		font-size: 3em;
-	}
+  font-weight: 700;
+  font-size: 5em;
+  line-height: 1.6;
+  text-transform: uppercase;
+  &::before,
+  &::after {
+    content: '';
+    display: block;
+    background: $darker-grey;
+    width: 80%;
+    height: 2px;
+    margin: 40px auto 5px;
+  }
+  &::after {
+    margin: 5px auto 0;
+  }
+  @media (max-width: 768px) {
+    font-size: 2em;
+  }
 }
 
 h2 {
-	font-weight: 400;
+  font-weight: 400;
 }
 
 p,
 a {
-	line-height: 1.75;
-	opacity: 0.75;
-	font-size: 1em;
-	color: #ffffff;
+  line-height: 1.75;
+  font-size: 1em;
+  color: $darker-grey;
+  opacity: 0.75;
+  font-family: 'Ubuntu', sans-serif;
 }
 a {
-	text-decoration: none;
-	&:hover {
-		opacity: 1;
-	}
+  text-decoration: none;
+  opacity: 0.75;
+  color: $accent;
+  &:hover {
+    opacity: 1;
+  }
 }

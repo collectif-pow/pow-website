@@ -1,5 +1,8 @@
-$darker-grey: #292929;
-$bg: #1d1d1d;
+$darker-grey: #1d1d1d;
+$darker-grey-transparent: #1d1d1d80;
+$bg: #ffffff;
+$bg-transparent: #ffffff80;
+$accent: #ee0082;
 $padding: 30px;
 $menu-margin: 58px;
 @mixin short-transition($delay: 0s) {
