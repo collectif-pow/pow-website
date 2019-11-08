@@ -71,8 +71,17 @@ export default {
     flex: 2;
     display: flex;
     flex-direction: column;
+    align-items: flex-end;
     @media (max-width: 768px) {
       flex: 1;
+    }
+    .bio {
+      max-width: 700px;
+    }
+  }
+  &.right {
+    .infos {
+      align-items: flex-start;
     }
   }
   .picture {
@@ -80,8 +89,9 @@ export default {
     background-repeat: no-repeat;
     background-position: center;
     background-size: cover;
-    height: 300px;
-    margin: auto;
+    height: 350px;
+    max-width: 400px;
+    margin: auto 30px;
     @media (max-width: 768px) {
       flex: unset;
       margin: 0;
