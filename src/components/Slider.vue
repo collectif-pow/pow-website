@@ -109,7 +109,7 @@ export default {
         @include short-transition;
       }
       &:hover .layer {
-        background-color: rgba(0, 0, 0, 0.3);
+        background-color: rgba(0, 0, 0, 0.5);
       }
     }
   }

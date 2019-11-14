@@ -25,6 +25,7 @@
         :paginationEnabled="false"
         loop
         autoplay
+        autoplayHoverPause
         class="carousel"
       >
         <slide v-for="i in project.gallery" :key="i.ID">
@@ -152,7 +153,7 @@ export default {
   .images {
     object-fit: cover;
     width: 60vw;
-    height: 45vh;
+    height: 80vh;
     margin: 10px 0;
     @media (max-width: 768px) {
       width: 90vw;
