@@ -1,9 +1,5 @@
 <template>
-  <div :style="style">
-    <svg width="100%" height="100%" :style="style">
-      <rect x="0" :y="y" :width="width" height="100%" :fill="fill" />
-    </svg>
-  </div>
+  <div :style="{ top, left }" />
 </template>
 
 <script>
@@ -13,30 +9,21 @@ const duration = 450
 export default {
   data() {
     return {
-      width: 0,
-      y: 0,
-      visible: false,
-      fill: '#1d1d1d',
+      top: '0vh',
+      left: '-100vw',
     }
-  },
-  computed: {
-    style() {
-      return this.visible ? 'visibility: visible' : 'visibility: hidden'
-    },
   },
   methods: {
     beforeLeave(el) {
       el.style.opacity = 0
       // reset values before enter animation
-      this.width = 0
-      this.y = 0
-      this.visible = true
+      this.top = '0vh'
+      this.left = '-100vw'
     },
     leave(el, done) {
-      const tl = anime.timeline()
-      tl.add({
+      anime({
         targets: this,
-        width: '100%',
+        left: '0vw',
         round: 1,
         easing: 'easeInOutQuart',
         duration: duration,
@@ -58,14 +45,11 @@ export default {
       const tl = anime.timeline()
       tl.add({
         targets: this,
-        y: '100%',
+        top: '100vh',
         round: 1,
         easing: 'easeInOutQuart',
         duration: duration,
-        complete: () => {
-          this.visible = false
-          done()
-        },
+        complete: () => done && done(),
       }).add({
         targets: el,
         opacity: 1,
@@ -84,16 +68,12 @@ export default {
 div {
   position: fixed;
   top: 0;
-  left: 0;
+  left: -100vw;
   z-index: 1;
   overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  svg {
-    rect {
-      will-change: y, height;
-    }
-  }
+  width: 100vw;
+  height: 100vh;
+  background-color: #1d1d1d;
 }
 </style>
