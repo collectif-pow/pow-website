@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ transform: `translate3D(${x}, ${y}, 0)` }" />
+  <div ref="layer" />
 </template>
 
 <script>
@@ -16,14 +16,17 @@ export default {
   methods: {
     beforeLeave(el) {
       el.style.opacity = 0
-      // reset values before enter animation
-      this.x = '-100vw'
-      this.y = '0vh'
+      anime({
+        targets: this.$refs.layer,
+        translateX: '-100vw',
+        translateY: '0vh',
+        duration: 0,
+      })
     },
     leave(el, done) {
       anime({
-        targets: this,
-        x: '0vw',
+        targets: this.$refs.layer,
+        translateX: '0vw',
         round: 1,
         easing: 'easeInOutQuart',
         duration: duration,
@@ -44,8 +47,8 @@ export default {
     enter(el, done) {
       const tl = anime.timeline()
       tl.add({
-        targets: this,
-        y: '100vh',
+        targets: this.$refs.layer,
+        translateY: '100vh',
         round: 1,
         easing: 'easeInOutQuart',
         duration: duration,
@@ -68,13 +71,12 @@ export default {
 div {
   position: fixed;
   z-index: 1;
-  overflow: hidden;
   box-sizing: border-box;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  transform: translate3d(-100vw, 0vh, 0);
+  transform: translateX(-100vw) translateX(0vh);
   will-change: transform;
   background-color: #1d1d1d;
 }
