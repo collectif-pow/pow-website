@@ -1,5 +1,5 @@
 <template>
-  <div :style="{ top, left }" />
+  <div :style="{ transform: `translate3D(${x}, ${y}, 0)` }" />
 </template>
 
 <script>
@@ -9,21 +9,21 @@ const duration = 450
 export default {
   data() {
     return {
-      top: '0vh',
-      left: '-100vw',
+      x: '-100vw',
+      y: '0vh',
     }
   },
   methods: {
     beforeLeave(el) {
       el.style.opacity = 0
       // reset values before enter animation
-      this.top = '0vh'
-      this.left = '-100vw'
+      this.x = '-100vw'
+      this.y = '0vh'
     },
     leave(el, done) {
       anime({
         targets: this,
-        left: '0vw',
+        x: '0vw',
         round: 1,
         easing: 'easeInOutQuart',
         duration: duration,
@@ -45,7 +45,7 @@ export default {
       const tl = anime.timeline()
       tl.add({
         targets: this,
-        top: '100vh',
+        y: '100vh',
         round: 1,
         easing: 'easeInOutQuart',
         duration: duration,
@@ -67,13 +67,15 @@ export default {
 
 div {
   position: fixed;
-  top: 0;
-  left: -100vw;
   z-index: 1;
   overflow: hidden;
   box-sizing: border-box;
+  top: 0;
+  left: 0;
   width: 100vw;
   height: 100vh;
+  transform: translate3d(-100vw, 0vh, 0);
+  will-change: transform;
   background-color: #1d1d1d;
 }
 </style>
