@@ -45,23 +45,22 @@ export default {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  @media (max-width: 768px) {
-    height: 80%;
-  }
   .slides {
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
     flex-wrap: wrap;
     width: 80vw;
     height: 100%;
     @media (max-width: 768px) {
-      flex-direction: column;
+      justify-content: flex-start;
       align-items: center;
+      width: 100vw;
     }
     .slide {
       position: relative;
       flex: 1;
-      height: 40vh;
+      min-height: 40vh;
       margin: 10px;
       padding: 10px;
       background-position: center;
@@ -74,8 +73,8 @@ export default {
       opacity: 0;
       transform: translateY(20px);
       @media (max-width: 768px) {
-        width: 80%;
-        height: auto;
+        width: 100%;
+        margin: 0 0 10px 0;
       }
       @for $i from 0 to 3 {
         &:nth-child(#{$i + 1}) {

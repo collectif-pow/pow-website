@@ -112,22 +112,27 @@ export default {
   width: 100%;
   z-index: 1;
   margin-bottom: 30px;
+  overflow: hidden;
   .title {
     text-align: center;
     margin-bottom: 0;
+    margin-top: 80px;
   }
   .infos {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 0 30px;
+    @media (max-width: 768px) {
+      padding: 0 10px;
+    }
   }
   .featured {
     object-fit: cover;
     width: 60vw;
     height: 45vh;
     @media (max-width: 768px) {
-      width: 90vw;
+      width: 100vw;
     }
   }
   .description {
@@ -138,9 +143,9 @@ export default {
   }
   .carousel {
     width: 60vw;
-    margin: 30px 0;
+    margin: 40px 0 20px 0;
     @media (max-width: 768px) {
-      width: 90vw;
+      width: 100vw;
     }
     /deep/ .VueCarousel-navigation-button {
       color: $darker-grey;
@@ -156,7 +161,7 @@ export default {
     height: 80vh;
     margin: 10px 0;
     @media (max-width: 768px) {
-      width: 90vw;
+      width: 100vw;
     }
   }
 }

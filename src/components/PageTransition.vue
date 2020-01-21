@@ -76,7 +76,7 @@ div {
   left: 0;
   width: 100vw;
   height: 100vh;
-  transform: translateX(-100vw) translateX(0vh);
+  transform: translateX(-100vw) translateY(0vh);
   will-change: transform;
   background-color: #1d1d1d;
 }
