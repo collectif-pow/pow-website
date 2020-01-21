@@ -31,7 +31,7 @@ export default {
       return `url(${s.featured_image.url}`
     },
     toggleVisible(isVisible, entry) {
-      entry.target.classList[isVisible ? 'add' : 'remove']('visible')
+      if (isVisible) entry.target.classList.add('visible')
     },
   },
 }
