@@ -1,9 +1,14 @@
 <template>
-  <div class="page projects">
+  <div class="page collaborations">
     <Shape :step="step" />
     <Nav />
-    <div class="content"></div>
-    <Footer />
+    <div class="content">
+      <h1 class="title">
+        Collaborations
+      </h1>
+      <Slider :slides="projects" />
+      <Footer />
+    </div>
   </div>
 </template>
 
@@ -13,6 +18,7 @@ import { mapState } from 'vuex'
 import Nav from '@/components/Nav.vue'
 import Footer from '@/components/Footer.vue'
 import Shape from '@/components/Shape.vue'
+import Slider from '@/components/Slider.vue'
 
 export default {
   name: 'collaborations',
@@ -20,6 +26,7 @@ export default {
     Nav,
     Footer,
     Shape,
+    Slider,
   },
   data() {
     return {
@@ -34,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState({
-      projects: state => state.projects,
+      projects: state => state.projects.filter(p => p.collaboration),
     }),
   },
   methods: {
@@ -54,4 +61,15 @@ export default {
 
 <style scoped lang="scss">
 @import '../assets/_variables';
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  z-index: 1;
+  margin-bottom: 30px;
+  .title {
+    text-align: center;
+  }
+}
 </style>

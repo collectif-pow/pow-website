@@ -125,6 +125,7 @@ export default {
     padding: 0 30px;
     @media (max-width: 768px) {
       padding: 0 10px;
+      width: 100vw;
     }
   }
   .featured {

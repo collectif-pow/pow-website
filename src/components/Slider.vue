@@ -60,7 +60,7 @@ export default {
     .slide {
       position: relative;
       flex: 1;
-      min-height: 40vh;
+      min-height: 35vh;
       margin: 10px;
       padding: 10px;
       background-position: center;
