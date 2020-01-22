@@ -22,6 +22,8 @@
         v-if="project.gallery.length"
         :per-page="1"
         navigationEnabled
+        :navigationPrevLabel="left"
+        :navigationNextLabel="right"
         :paginationEnabled="false"
         loop
         autoplay
@@ -47,6 +49,30 @@ import Footer from '@/components/Footer.vue'
 import Shape from '@/components/Shape.vue'
 import Player from '@/components/Player.vue'
 
+const left = `
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="64"
+    height="64"
+    viewBox="0 0 24 24"
+    class="chevron"
+>
+    <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z" />
+  </svg>
+`
+
+const right = `
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="64"
+    height="64"
+    viewBox="0 0 24 24"
+    class="chevron"
+>
+    <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z" />
+  </svg>
+`
+
 export default {
   name: 'projects',
   components: {
@@ -60,13 +86,12 @@ export default {
   data() {
     return {
       step: 0,
-      slickOptions: {
-        autoplay: true,
-        slidesToShow: 1,
-      },
+      left,
+      right,
     }
   },
   mounted() {
+    console.log(left)
     setTimeout(() => {
       this.incStep()
     }, 1000)
@@ -148,11 +173,26 @@ export default {
     @media (max-width: 768px) {
       width: 100vw;
     }
+    /deep/ .chevron {
+      fill: $darker-grey-transparent;
+      @media (max-width: 768px) {
+        fill: $accent;
+      }
+    }
     /deep/ .VueCarousel-navigation-button {
-      color: $darker-grey;
       outline: none;
       @media (max-width: 768px) {
-        display: none;
+        top: 90%;
+      }
+    }
+    /deep/ .VueCarousel-navigation-prev {
+      @media (max-width: 768px) {
+        left: 80px;
+      }
+    }
+    /deep/ .VueCarousel-navigation-next {
+      @media (max-width: 768px) {
+        right: 80px;
       }
     }
   }
