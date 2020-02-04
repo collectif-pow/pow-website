@@ -4,7 +4,7 @@
     <Nav />
     <div class="content">
       <h1 class="title">
-        Collaborations
+        Références
       </h1>
       <Slider :slides="projects" />
       <Footer />
@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState({
-      projects: state => state.projects.filter(p => p.collaboration),
+      projects: state => state.projects.filter(p => p.reference),
     }),
   },
   methods: {

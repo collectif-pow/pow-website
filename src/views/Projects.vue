@@ -41,7 +41,7 @@ export default {
   },
   computed: {
     ...mapState({
-      projects: state => state.projects.filter(p => !p.collaboration),
+      projects: state => state.projects.filter(p => !p.reference),
     }),
   },
   methods: {

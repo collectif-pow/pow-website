@@ -8,8 +8,8 @@
     <div class="nav--list">
       <router-link to="/" @click.native="showMenu">ACCUEIL</router-link>
       <router-link to="/projects" @click.native="showMenu">PROJETS</router-link>
-      <router-link to="/collaborations" @click.native="showMenu">
-        COLLABORATIONS
+      <router-link to="/references" @click.native="showMenu">
+        RÉFÉRENCES
       </router-link>
       <router-link to="/members" @click.native="showMenu">MEMBRES</router-link>
     </div>

@@ -4,9 +4,7 @@
     <Nav />
     <div class="content">
       <div>
-        <h1 class="title">
-          {{ project.title }}
-        </h1>
+        <h1 class="title" v-html="project.title" />
         <div class="infos">
           <h2>
             {{ project.tagline }}
