@@ -98,8 +98,8 @@ export default {
     position: fixed;
     top: 0;
     width: 100vw;
-    height: 100vh;
-    padding: 20vh 0;
+    height: calc(100 * var(--vh));
+    padding: calc(20 * var(--vh)) 0;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -16,22 +16,21 @@
       </div>
       <img class="featured" :src="project.featured_image.url" />
       <div class="description" v-html="project.description"></div>
-      <carousel
-        v-if="project.gallery.length"
-        :per-page="1"
-        navigationEnabled
-        :navigationPrevLabel="left"
-        :navigationNextLabel="right"
-        :paginationEnabled="false"
-        loop
-        autoplay
-        autoplayHoverPause
-        class="carousel"
-      >
-        <slide v-for="i in project.gallery" :key="i.ID">
-          <img class="images" :src="i.url" />
-        </slide>
-      </carousel>
+      <div class="slideshow" @click="next()">
+        <shader-slide
+          :images="images()"
+          :displacement="displacement"
+          :intensity="0.2"
+          :speedIn="1.4"
+          :speedOut="1.4"
+          isInteractive
+          ref="slideshow"
+        ></shader-slide>
+        <div class="controls">
+          <span v-html="left" class="left" @click="prev()" />
+          <span v-html="right" class="right" @click="next()" />
+        </div>
+      </div>
       <Player v-if="project.video && project.video.id" :video="project.video" />
       <Footer />
     </div>
@@ -40,12 +39,14 @@
 
 <script>
 import { mapState } from 'vuex'
-import { Carousel, Slide } from 'vue-carousel'
 
 import Nav from '@/components/Nav.vue'
 import Footer from '@/components/Footer.vue'
 import Shape from '@/components/Shape.vue'
 import Player from '@/components/Player.vue'
+import ShaderSlide from '@/components/ShaderSlide/index.vue'
+
+import displacement from '@/assets/displacement.png'
 
 const left = `
   <svg
@@ -77,8 +78,7 @@ export default {
     Nav,
     Footer,
     Shape,
-    Carousel,
-    Slide,
+    ShaderSlide,
     Player,
   },
   data() {
@@ -86,10 +86,10 @@ export default {
       step: 0,
       left,
       right,
+      displacement,
     }
   },
   mounted() {
-    console.log(left)
     setTimeout(() => {
       this.incStep()
     }, 1000)
@@ -115,12 +115,14 @@ export default {
         this.step++
       }, 8000)
     },
-    next() {
-      this.$refs.slick.next()
+    images() {
+      return this.project.gallery.map(g => g.url)
     },
-
+    next() {
+      if (this.$refs.slideshow) this.$refs.slideshow.next()
+    },
     prev() {
-      this.$refs.slick.prev()
+      if (this.$refs.slideshow) this.$refs.slideshow.previous()
     },
   },
 }
@@ -165,42 +167,59 @@ export default {
       width: 90vw;
     }
   }
-  .carousel {
-    width: 60vw;
-    margin: 40px 0 20px 0;
-    @media (max-width: 768px) {
-      width: 100vw;
-    }
-    /deep/ .chevron {
-      fill: $darker-grey-transparent;
-      @media (max-width: 768px) {
-        fill: $accent;
-      }
-    }
-    /deep/ .VueCarousel-navigation-button {
-      outline: none;
-      @media (max-width: 768px) {
-        top: 90%;
-      }
-    }
-    /deep/ .VueCarousel-navigation-prev {
-      @media (max-width: 768px) {
-        left: 80px;
-      }
-    }
-    /deep/ .VueCarousel-navigation-next {
-      @media (max-width: 768px) {
-        right: 80px;
-      }
-    }
-  }
-  .images {
-    object-fit: cover;
+  .slideshow {
+    position: relative;
     width: 60vw;
     height: 80vh;
-    margin: 10px 0;
+    margin: 40px 0 20px 0;
+    cursor: pointer;
+    user-select: none;
+    touch-action: none;
+    -ms-touch-select: none;
+    -webkit-touch-callout: none;
+    -webkit-tap-highlight-color: transparent;
     @media (max-width: 768px) {
       width: 100vw;
+    }
+    .controls {
+      position: absolute;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      bottom: 50%;
+      transform: translateY(50%);
+      z-index: 1;
+      @media (max-width: 768px) {
+        bottom: 0;
+        transform: translateY(0);
+      }
+      .left {
+        position: relative;
+        left: -60px;
+        @media (max-width: 768px) {
+          left: 0;
+        }
+      }
+      .right {
+        position: relative;
+        right: -60px;
+        @media (max-width: 768px) {
+          right: 0;
+        }
+      }
+      .left,
+      .right {
+        cursor: pointer;
+        @media (max-width: 768px) {
+          padding: 20px 0;
+        }
+        /deep/ svg {
+          fill: $darker-grey-transparent;
+          @media (max-width: 768px) {
+            fill: $accent;
+          }
+        }
+      }
     }
   }
 }
