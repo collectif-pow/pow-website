@@ -151,6 +151,9 @@ export default {
     @media (max-width: 768px) {
       padding: 0 10px;
       width: 100vw;
+      flex-direction: column;
+      text-align: center;
+      margin-bottom: 20px;
     }
   }
   .featured {
