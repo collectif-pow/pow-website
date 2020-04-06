@@ -177,7 +177,6 @@ export default {
     margin: 40px 0 20px 0;
     cursor: pointer;
     user-select: none;
-    touch-action: none;
     -ms-touch-select: none;
     -webkit-touch-callout: none;
     -webkit-tap-highlight-color: transparent;
@@ -218,7 +217,13 @@ export default {
         }
         /deep/ svg {
           fill: $darker-grey-transparent;
+          @include short-transition;
           @media (max-width: 768px) {
+            fill: $accent;
+          }
+        }
+        &:hover {
+          /deep/ svg {
             fill: $accent;
           }
         }

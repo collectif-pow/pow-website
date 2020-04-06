@@ -291,7 +291,6 @@ export default {
     insertImage(path, index = this.textures.length) {
       const loader = new TextureLoader()
       loader.setCrossOrigin('')
-      console.log(loader)
       return new Promise(resolve => {
         let texture = loader.load(path, () => {
           this.render()
